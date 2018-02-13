@@ -1,0 +1,19 @@
+https://www.codechef.com/FEB18/problems/CARPTUN/
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+#define rep ll t;cin>>t;while(t--)
+int main() {
+    rep{
+        ll mul=INT_MIN,n,k,i,l,m,d,s,c;
+        cin>>n;
+    
+        for(i=0;i<n;i++)
+    {cin>>k;
+    if(k>mul)
+        mul=k;
+    }cin>>c>>d>>s;
+    cout<<(c-1)*(mul)<<endl;
+    }
+	return 0;
+} 

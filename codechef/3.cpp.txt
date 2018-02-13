@@ -1,0 +1,57 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+#define rep ll t;cin>>t;while(t--)
+#define fr(i,x) for( i=0 ; i<x ; i++)
+int main() {
+    
+    rep{
+        string s;
+        cin>>s;
+       ll storedi,flag=1,oddflag=0,i,j,k,l,count;
+ll arr[s.length()];
+        vector<vector<int>>store(26);
+    vector<pair<ll,ll>>all;
+    fr(i,s.length())
+    {store[s[i]-'a'].push_back(i);
+        all.push_back(make_pair(s[i]-'a',i));
+    }
+    sort(all.begin(),all.end());
+    fr(i,26)
+    {if(store[i].size()%2!=0)
+      if(oddflag==0)
+        {oddflag=1;
+        storedi=i;
+            
+        }else
+        flag=0;
+    }
+if(flag)
+{ll x;
+    if(oddflag==1)
+    {for(auto it=all.begin();it!=all.end();it++)
+    {if((*it).first==storedi)
+    {x=it->second;
+    all.erase(it);
+    break;
+    }   
+    }
+        arr[s.length()/2]=x;}
+            auto it=all.begin();
+ 
+        for(i=0;i<s.length()/2;i++)
+        {//cout<<"test";
+            arr[i]=(it++)->second;
+            arr[s.length()-1-i]=(it++)->second;
+        }
+    
+    for(i=0;i<s.length();i++)
+    {cout<<arr[i]+1<<" ";}
+    cout<<endl;
+}
+else
+cout<<"-1"<<endl;
+ 
+    }
+    return 0;
+} 

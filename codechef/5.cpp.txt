@@ -1,0 +1,124 @@
+https://www.codechef.com/FEB18/problems/BROCLK
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+#define rep ll ti;cin>>ti;while(ti--)
+#define mod 1000000007
+ll sisqr;
+// C++ program to find multiplicative modulo inverse using
+// Extended Euclid algorithm.
+ 
+ll power(ll x, ll y, ll p=mod)
+{
+    ll res = 1;      // Initialize result
+ 
+    x = x % p;  // Update x if it is more than or 
+                // equal to p
+ 
+    while (y > 0)
+    {
+        // If y is odd, multiply x with result
+        if (y & 1)
+            res = (res*x) % p;
+ 
+        // y must be even now
+        y = y>>1; // y = y/2
+        x = (x*x) % p;  
+    }
+    return res;
+}
+ 
+void reset(ll &a,ll  &b)
+{ll m=abs(__gcd(a,b));
+a/=m;b/=m;
+    }
+    ll cs(bool ar[],ll j,ll co[],ll si[],ll l,ll d);
+ 
+ll ss(bool ar[],ll j,ll co[],ll si[],ll l,ll d)
+{for(ll i=j;i<60;i++)
+{if(ar[i]==1)
+{ll p,q,p1,q1;
+    ll pr=ss(ar,i+1,co,si,l,d);
+    
+    p1=co[i+1];
+    
+    p=(p1*pr)%mod;
+    
+    pr=cs(ar,i+1,co,si,l,d);
+    pr*=si[i+1];
+    pr%=mod;
+    p=(p+pr)%mod;
+ 
+    return p;
+}}
+    return 0;
+}
+ll cs(bool ar[],ll j,ll co[],ll si[],ll l,ll d)
+{for(ll i=j;i<60;i++)
+{if(ar[i]==1)
+{
+    ll p,q,p1,q1,pr;
+     p=ss(ar,i+1,co,si,l,d);
+    p1=sisqr;
+    if(i)
+    p1*=(si[i+1])%mod;
+    p=(p1*p)%mod;
+    
+    p1=cs(ar,i+1,co,si,l,d);
+    //cout<<"cos"<<i+1<<" teheta % mod: "<<p1<<endl<<endl;
+    p1*=co[i+1];
+    p1%=mod;
+    p=(mod-p%mod+p1%mod)%mod;
+ 
+    return p;
+ 
+    
+}}
+    return 1;
+}
+    
+    
+    
+ 
+int main() {
+    rep{ll c,d,l,i,j,k,m,n,t,p,q,coans[60],sians[60];
+    vector<vector<ll>> co(60,vector<ll>(2,0)),si(60,vector<ll>(2,0));
+       bool ar[60]={0};
+        cin>>l>>d>>t;
+        co[0][1]=1;coans[0]=1;
+        j=power(l,mod-2,mod);
+        coans[1]=(j*d%mod)%mod;
+        sisqr=((((l%mod)*(l%mod))%mod-((d%mod)*(d%mod))%mod)*((j%mod)*(j%mod)))%mod;
+        co[1][0]=d;
+        co[1][1]=l;
+        sians[0]=0;
+       // cout<<coans[1]<<endl;
+        sians[1]=1;
+    reset(co[1][0],co[1][1]);
+    si[0][0]=0;
+        si[0][1]=1;
+        si[1][0]=1;
+            si[1][1]=1;
+ 
+for(i=2;i<60;i++)
+{coans[i]=((2*(coans[i-1]*coans[i-1])%mod)%mod-1+mod)%mod;
+}
+ for(i=2;i<60;i++)
+{sians[i]=(2*(coans[i-1]%mod*sians[i-1]%mod)%mod)%mod;
+}   m=t;    
+ 
+for(i=0;i<60&&m;i++)
+{if(m%2==1)
+ar[i]=1;
+    
+m/=2;
+ 
+}j=cs(ar,0,coans,sians,l,d);
+ //cout<<j<<endl;
+//cout<<coans[t]<<endl;
+cout<<(l*j)%mod<<endl;
+ 
+ 
+    }
+	return 0;
+}  
