@@ -58,6 +58,7 @@ store[vec[i][j]].insert(pa);
  }
     
  }
+  
  
      for(auto it=store[1].begin();it!=store[1].end();it++)
 {  ll x=it->first,y=it->second;
